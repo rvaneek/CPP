@@ -26,46 +26,76 @@ public:
         this->right = right;
     }
 
+
+    //Function to insert new nodes into the tree
     void insert(const int data) {
+        //checking whether the new node should go toward the left child
         if (this->left && this->data > data)
             this->left->insert(data);
-        else if (this->right && this->data <= data)
+
+        //checking whether the new node should go toward the right child
+        if (this->right && this->data <= data)
             this->right->insert(data);
+
+            //Inserting new node as the left child to current node
         else if (this->data > data)
             this->left = new Node(data);
+
+            //Inserting new node as the right child to current node
         else
             this->right = new Node(data);
     }
 
+    //Funtion to remove the entire tree from the memory
     void remove() const {
+        //Check for left child
         if (this->left)
             this->left->remove();
+
+        //Check for right child
         if (this->right)
             this->right->remove();
+
+        //Deleting the current node
         delete this;
     }
 
     void preOrder() const {
+        //print the root node
         cout << this->data << " ";
+
+        //then print the left node (if any)
         if (this->left)
             this->left->preOrder();
+
+        //then print the right node (if any)
         if (this->right)
             this->right->preOrder();
     }
 
     void inOrder() const {
+        //print the left node (if any)
         if (this->left)
             this->left->inOrder();
+
+        //then print the root node
         cout << this->data << " ";
+
+        //then print the right node (if any)
         if (this->right)
             this->right->inOrder();
     }
 
     void postOrder() const {
+        //print the left node (if any)
         if (this->left)
             this->left->postOrder();
+
+        //then print the right node (if any)
         if (this->right)
             this->right->postOrder();
+
+        //then print the root node
         cout << this->data << " ";
     }
 
@@ -100,19 +130,22 @@ public:
         }
     }
 
+    //Finding the least value by going towards the left most node
     Node *findMin() {
         if (this->left)
             return this->left->findMin();
         return this;
     }
 
+    //Finding the max value by going towards the right most node
     Node *findMax() {
         if (this->right)
             return this->right->findMax();
         return this;
     }
 
-   bool findNode(int data) {
+
+    bool findNode(int data) {
         if (this->data == data)
             return true;
         if (this->right && this->data < data)
