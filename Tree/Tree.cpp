@@ -145,14 +145,39 @@ public:
     }
 
 
-    bool findNode(int data) {
+    Node *findNode(int data) {
         if (this->data == data)
-            return true;
+            return this;
         if (this->right && this->data < data)
             return this->right->findNode(data);
         if (this->left && this->data > data)
             return this->left->findNode(data);
+        return nullptr;
+    }
+
+    int findDepth(int i = 1) {
+        if (this->left)
+            i = max(i, this->left->findDepth(i + 1));
+        if (this->right)
+            i = max(i, this->right->findDepth(i + 1));
+        return i;
+    }
+
+    bool deleteNode(int data) {
+        if (this->data == data)
+            return this->deleteNode();
+        else if (this->data > data)
+            this->left->deleteNode(data);
+        else if (this->data < data)
+            this->right->deleteNode(data);
         return false;
+    }
+
+    bool deleteNode() {
+        auto temp = this->left;
+        while (temp->right!=nullptr)
+            temp=temp->right;
+        return true;
     }
 };
 
@@ -165,7 +190,8 @@ int main() {
                 "Press 3 to get Minimum." << endl <<
                 "Press 4 to get Maximum." << endl <<
                 "Press 5 to search value." << endl <<
-                "Press 6 for exit." << endl << endl;
+                "Press 6 to find Depth." << endl <<
+                "Press 7 for exit." << endl << endl;
 
         cout << "Enter your choice : ";
         cin >> choice;
@@ -177,6 +203,7 @@ int main() {
                     root = new Node(data);
                 else
                     root->insert(data);
+                cout << "Insertion Successfull." << endl;
                 break;
             case 2:
                 if (!root)
@@ -210,8 +237,13 @@ int main() {
                 }
                 break;
             case 6:
-                // if (root)
-                //     root->remove();
+                if (!root)
+                    cout << "The Tree is Empty!" << endl;
+                else
+                    cout << "The depth of tree is " << root->findDepth() << endl;
+                break;
+
+            case 7:
                 cout << "Program Exited." << endl;
                 break;
             default:
@@ -219,7 +251,7 @@ int main() {
         }
         _getch();
         system("cls");
-    } while (choice != 6);
+    } while (choice != 7);
     if (root)
         root->remove();
 }
