@@ -1,7 +1,4 @@
-#include <bits/stdc++.h>
 #include "Graph_1.h"
-using namespace std;
-
 
 int main() {
     auto *g = new Graph();
@@ -9,8 +6,8 @@ int main() {
     g->addEdge(4, 3);
     g->addEdge(3, 0);
 
-    cout<<g->hasEdge(4,2)<<endl;
-    cout<<g->hasEdge(4,3)<<endl;
+    cout << g->hasEdge(4, 2) << endl;
+    cout << g->hasEdge(4, 3) << endl;
 
     g->print();
     delete g;
