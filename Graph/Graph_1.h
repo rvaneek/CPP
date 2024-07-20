@@ -1,3 +1,9 @@
+//
+// Created by Aneek on 20-07-2024.
+//
+
+#ifndef GRAPH_1_H
+#define GRAPH_1_H
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -30,14 +36,12 @@ public:
             cout << endl;
         }
     }
+
+    bool hasEdge(int u, int v) {
+        if (g[u][v])
+            return true;
+        return false;
+    }
 };
 
-int main() {
-    auto *g = new Graph();
-    g->addEdge(1, 2);
-    g->addEdge(4, 3);
-    g->addEdge(3,0);
-
-    g->print();
-    delete g;
-}
+#endif //GRAPH_1_H
