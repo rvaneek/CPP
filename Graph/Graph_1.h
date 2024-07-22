@@ -23,12 +23,12 @@ public:
         }
     }
 
-    void addEdge(int u, int v, int weight = 1) {
+    void addEdge(const int u, const int v, const int weight = 1) const {
         g[u][v] = weight;
         g[v][u] = weight;
     }
 
-    void print() {
+    void print() const {
         for (auto i = 0; i < dimension; i++) {
             for (auto j = 0; j < dimension; j++) {
                 cout << g[i][j] << " ";
@@ -37,10 +37,18 @@ public:
         }
     }
 
-    bool hasEdge(int u, int v) {
+    [[nodiscard]] bool hasEdge(const int u, const int v) const {
         if (g[u][v])
             return true;
         return false;
+    }
+
+    void findLinks(int u) const {
+        cout << "All Vertexes connected to " << u << " is\are :" << endl;
+        for (int i = 0; i < dimension; i++) {
+            if (g[u][i])
+                cout << i << " (" << g[u][i] << ")" << endl;
+        }
     }
 };
 
