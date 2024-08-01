@@ -53,7 +53,7 @@ public:
         adjList[source - 1] = newNode;
 
         newNode = new Node(source);
-        newNode->next=adjList[destination-1];
+        newNode->next = adjList[destination - 1];
 
 
         //Addition of something
